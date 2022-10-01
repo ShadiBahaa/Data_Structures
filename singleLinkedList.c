@@ -71,30 +71,22 @@ void delete_first()
 }
 void delete_last()
 {
-    if (head==NULL)
+    if(head != NULL)
     {
-        return;
+        if(head->next == NULL)
+        {
+            head = NULL;
+        }
+        else
+        {
+            Node* temp = head;
+            while(temp->next->next != NULL)
+                temp = temp->next;
+            Node* lastNode = temp->next;
+            temp->next = NULL;
+            free(lastNode);
+        }
     }
-    Node* prev = NULL;
-    Node* cur = head;
-    while (cur->next!=NULL)
-    {
-        prev = cur;
-        cur = cur->next;
-    }
-    if (prev)
-    {
-        prev->next = NULL;
-        free(cur);
-        cur = NULL;
-    }
-    else
-    {
-        head = NULL;
-        free(cur);
-        cur = NULL;
-    }
-    len--;
 }
 void insert_first(u32 value)
 {
